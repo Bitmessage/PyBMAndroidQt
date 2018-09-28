@@ -338,8 +338,8 @@ class UIToolTab(QWidget):
         fbox.addRow(l3,self.add3)
 
         try:
-            pickle_off = open("Credentials.pickle","rb")
-            emp = pickle.load(pickle_off)
+            pickle_off = open("Credentials.json","r")
+            emp = json.load(pickle_off)
             self.add1.setText(emp['username'])
             self.add2.setText(emp['password'])
             self.add4.setText(emp['ip'])
@@ -374,9 +374,8 @@ class MainWindow(QMainWindow):
         ip = self.ToolTab.add4.text()
         port = self.ToolTab.add3.text()
         emp = {'username':user,'password':password,'ip':ip,'port':port}
-        pickling_on = open("Credentials.pickle","wb")
-        pickle.dump(emp, pickling_on)
-        pickling_on.close()
+        credentials = open("Credentials.json","w")
+        json.dump(emp, credentials)
 
     def verify(self):
         global api
